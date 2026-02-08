@@ -1,3 +1,4 @@
+'use strict'
 /**
  * 
  * @param {number} ageFather - возраст отца
