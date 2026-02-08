@@ -1,56 +1,58 @@
-'use strict'
-
 /**
- * Вычисляет, через сколько лет (или сколько лет назад)
- * отец будет (или был) вдвое старше сына.
- *
- * @param {number} fatherAge - текущий возраст отца
- * @param {number} sonAge - текущий возраст сына
- * @returns {number} Количество лет:
- * положительное — в будущем,
- * отрицательное — в прошлом,
- * 0 — сейчас,
- * -1 — при некорректных данных
+ * 
+ * @param {number} ageFather - возраст отца
+ * @param {number} ageSon - возраст сына
+ * 
  */
- function fatherTwofoldOlder(fatherAge, sonAge) {
-    // Проверка на отрицательные возраста
-    if (fatherAge < 0 || sonAge < 0) return -1;
-  
-    // Проверка разницы возрастов
-    if (fatherAge - sonAge < 15) return -1;
-  
-    const years = fatherAge - 2 * sonAge;
-  
-    // Проверка, что в момент события возраст сына не отрицательный
-    if (sonAge + years < 0) return -1;
-  
-    //Повышенная сложность
-    const absYears = Math.abs(years);
-    const yearWord = getYearWord(absYears);
-  
-    if (years > 0) {
-      console.log(`Отец будет вдвое старше сына через ${absYears} ${yearWord}`);
-    } else if (years < 0) {
-      console.log(`Отец был вдвое старше сына ${absYears} ${yearWord} назад`);
-    } else {
-      console.log(`Отец сейчас вдвое старше сына`);
-    }
-  
-    return years;
-  }
-  
-  /**
-   * Возвращает правильное склонение слова "год"
-   *
-   * @param {number} n
-   * @returns {string}
-   */
-  function getYearWord(n) {
-    if (n % 10 === 1 && n % 100 !== 11) return 'год';
-    if ([2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100)) {
-      return 'года';
-    }
-    return 'лет';
-  }
 
-  fatherTwofoldOlder(20, 5);
+ function fatherTwofoldOlder(ageFather, ageSon) {
+  if(ageFather >= 15 && ageSon >= 0 && ageFather - ageSon >= 15){
+
+      let result = ageFather - ageSon * 2;
+
+
+      /**
+       * 
+       * @param {number} result - положительное значение, через сколько будет старше вдвое
+       *                          отрицательное, когда был старше вдвое
+       * @returns {string} - правильное слово
+       */
+
+      function yearWord(result){
+
+          if (result % 10 === 1 && result % 100 !== 11) {
+
+              return "год";
+
+          } else if (result % 10 >= 2 && 
+                     result % 10 <= 4 && 
+                     !(result % 100 >= 12 && 
+                     result % 100 <= 14)) {
+
+              return "года";
+
+          } else{
+
+              return "лет";
+
+          }
+          
+          
+      }
+
+      if(result >= 0) {
+          console.log(`Отец будет старше вдвое через ${result} ${yearWord()}`)
+      }else {
+          console.log(`Отец был старше вдвое ${result * -1} ${yearWord()} назад`)
+      }
+
+  }else {
+      console.log('Вы ввели некоректный возраст!');
+  }
+}
+
+fatherTwofoldOlder(60, 40);
+fatherTwofoldOlder(15, 0);
+fatherTwofoldOlder(20, 3);
+fatherTwofoldOlder(55, 25);
+fatherTwofoldOlder(90, 60);
