@@ -7,9 +7,9 @@
  */
 function twofoldOlder(fatherAge, sonAge) {
 
-  if (fatherAge < 0 || sonAge < 0) return 0;
+  if (fatherAge < 0 || sonAge < 0) return NaN;
 
-  if (fatherAge - sonAge < 15) return 0;
+  if (fatherAge - sonAge < 15) return NaN;
 
   return fatherAge - 2 * sonAge;
 }
@@ -33,7 +33,7 @@ function yearWord(result) {
 
 }
 
-const result = twofoldOlder(30, 15);
+const result = twofoldOlder(15, 5);
 
 switch (true) {
   case result < 0:
